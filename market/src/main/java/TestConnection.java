@@ -1,8 +1,10 @@
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 public class TestConnection {
 
@@ -11,15 +13,25 @@ public class TestConnection {
         JdbcTemplate jdbcTemplate = context.getBean(JdbcTemplate.class);
 
         try {
-            String sql = "SELECT university_name FROM Universities";
-            List<String> universities = jdbcTemplate.queryForList(sql, String.class);
+            // Fetch university names from the Universities table
+            String universitySql = "SELECT university_name FROM Universities";
+            List<String> universities = jdbcTemplate.queryForList(universitySql, String.class);
 
-            System.out.println("대학 목록:");
+            System.out.println("\n대학 목록:");
             for (String university : universities) {
                 System.out.println(university);
+            }
+
+            // Fetch all items from the Items table
+            String itemsSql = "SELECT * FROM Items";
+            List<Map<String, Object>> items = jdbcTemplate.queryForList(itemsSql);
+
+            System.out.println("\nItems 목록:");
+            for (Map<String, Object> item : items) {
+                System.out.println(item);
             }
         } catch (Exception e) {
             System.out.println("오류: " + e.getMessage());
         }
     }
-}// 잘 연동되었는지 확인용도
+}// 잘 나오는지 테스트
