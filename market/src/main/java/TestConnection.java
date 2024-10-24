@@ -34,4 +34,5 @@ public class TestConnection {
             System.out.println("오류: " + e.getMessage());
         }
     }
+    
 }// 잘 나오는지 테스트

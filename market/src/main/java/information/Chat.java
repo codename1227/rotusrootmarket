@@ -1,5 +1,6 @@
 package information;
 
+
 import java.sql.Timestamp;
 
 public class Chat {

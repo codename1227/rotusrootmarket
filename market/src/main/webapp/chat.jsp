@@ -20,6 +20,7 @@
     ChatController chatController = new ChatController();
     List chatMessages = chatController.getChatsForItem(itemId);
 %>
+
 <html>
 <head>
     <title>아이템 채팅</title>

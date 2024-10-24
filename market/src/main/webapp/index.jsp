@@ -3,7 +3,6 @@
 <%@ page import="information.Item" %>
 <%@ page import="information.ItemController" %>
 
-<%-- ItemController 인스턴스 생성 --%>
 <%
     ItemController itemController = new ItemController();
     List<Item> items = itemController.getAllItems();
