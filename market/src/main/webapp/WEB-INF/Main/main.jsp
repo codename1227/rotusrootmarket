@@ -15,7 +15,7 @@
     /* 헤더 스타일 */
     #header {
         background-color: #f8f9fa;
-        padding: 20px;
+        padding: 20px; 
         display: flex;
         justify-content: space-between;
         align-items: center;

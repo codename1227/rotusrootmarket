@@ -14,7 +14,7 @@
 			value="jdbc:mysql://localhost:3306/User?serverTimeZone=UTC" />
 		<property name="username" value="root" />
 		<property name="password" value="2311" />
-	</bean>
+	</bean> 
  
 	<!-- jdbcTmplate 와 datasource 와 연결 -->
 
