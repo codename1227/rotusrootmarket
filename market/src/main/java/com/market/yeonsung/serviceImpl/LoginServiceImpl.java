@@ -13,4 +13,5 @@ public class LoginServiceImpl extends MemberDAO implements LoginService {
 	public int loginService(Map<String, Object> params) throws Exception {
 		return 1;
 	}
-}
+} 
+ 

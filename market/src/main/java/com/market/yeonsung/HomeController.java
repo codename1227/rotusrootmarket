@@ -45,7 +45,7 @@ public class HomeController {
 	public String login(Model model) {
 		return "Login/login";
 	}
-	
+	 
 	
 	/*
 	 * 메인 화면

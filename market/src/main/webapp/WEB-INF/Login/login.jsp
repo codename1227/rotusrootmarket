@@ -102,7 +102,7 @@ body {
 	color: #000;
 }
 </style>
-</head>
+</head> 
 <body>
 	<div class="login-wrapper">
 		<h2>Login</h2>
