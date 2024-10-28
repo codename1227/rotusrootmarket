@@ -36,4 +36,23 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	/*
+	 * 로그인 화면
+	 */
+	@RequestMapping("/login")
+	public String login(Model model) {
+		return "loginpage";
+	}
+	  
+	
+	/*
+	 * 메인 화면
+	 */
+	@RequestMapping("/main")
+	public String main(Model model) {
+		return "Main/main";
+	}
+	
 }
+

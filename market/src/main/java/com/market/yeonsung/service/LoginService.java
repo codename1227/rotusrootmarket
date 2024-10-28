@@ -1,5 +1,9 @@
 package com.market.yeonsung.service;
 
-public class LoginService {
+import java.util.Map;
 
-}
+public interface LoginService {
+	
+	public int loginService(Map<String, Object> params) throws Exception;
+} 
+ 
