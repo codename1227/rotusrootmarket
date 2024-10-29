@@ -38,17 +38,21 @@
                     <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">거래 목록</h3>
                     <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
                     
-                        <div class="flex flex-wrap gap-3 pb-3">
-                            <c:forEach var="item" items="${items}">
-                                <div class="flex flex-col gap-2 p-4 border rounded-lg flex-1 min-w-[200px] max-w-[300px]">
-                                    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl" style="background-image: url('https://cdn.usegalileo.ai/stability/a469ecb7-9ea2-45e5-ba75-55bdba0b350d.png');"></div>
-                                    <div>
-                                        <p class="text-[#111318] text-base font-medium leading-normal">${item.title}</p>
-                                        <p class="text-[#636f88] text-sm font-normal leading-normal">$${item.price}</p>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
+<div class="flex flex-wrap gap-3 pb-3">
+    <c:forEach var="item" items="${items}">
+        <div class="flex flex-col gap-2 p-4 border rounded-lg flex-1 min-w-[200px] max-w-[300px]">
+            <div class="w-full rounded-xl overflow-hidden" style="aspect-ratio: 1/1;">
+                <img src="${pageContext.request.contextPath}/resources/images/${item.image}"
+                     alt="${item.title}" class="w-full h-full object-contain" />
+            </div>
+            <div>
+                <p class="text-[#111318] text-base font-medium leading-normal">${item.title}</p>
+                <p class="text-[#636f88] text-sm font-normal leading-normal">$${item.price}</p>
+            </div>
+        </div>
+    </c:forEach>
+</div>
+
                         
                     </div>
                 </div>
