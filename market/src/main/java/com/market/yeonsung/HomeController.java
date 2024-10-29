@@ -62,6 +62,11 @@ public class HomeController {
         model.addAttribute("items", items);
 		return "mainpage";
 	}
+    // 상품 등록 폼 화면
+    @RequestMapping("/add")
+    public String showAddItemForm() {
+        return "registration";
+    }
 	
 }
 

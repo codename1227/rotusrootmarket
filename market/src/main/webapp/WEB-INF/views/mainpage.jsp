@@ -24,6 +24,9 @@
                     <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]">
                         <span class="truncate">Sign in</span>
                     </button>
+                    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/add'">
+                        <span class="truncate">물품 등록</span>
+                    </button>
                     <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
                         <div class="text-[#111318]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
@@ -35,24 +38,23 @@
             </header>
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-                    <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">거래 목록</h3>
+                    <div class="flex justify-between items-center px-4 pb-2 pt-4">
+                        <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">거래 목록</h3>
+                    </div>
                     <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-                    
-						<div class="flex flex-wrap gap-3 pb-3">
-						    <c:forEach var="item" items="${items}">
-						        <div class="flex flex-col gap-2 p-4 border rounded-lg flex-1 min-w-[200px] max-w-[300px]">
-						            <div class="w-full rounded-xl overflow-hidden" style="aspect-ratio: 1/1;">
-						                <img src="${pageContext.request.contextPath}/resources/images/${item.image}"
-						                     alt="${item.title}" class="w-full h-full object-contain" />
-						            </div>
-						            <div>
-						                <p class="text-[#111318] text-base font-medium leading-normal">${item.title}</p>
-						                <p class="text-[#636f88] text-sm font-normal leading-normal">$${item.price}</p>
-						            </div>
-						        </div>
-						    </c:forEach>
-						</div>
-                        
+                        <div class="flex flex-wrap gap-3 pb-3">
+                            <c:forEach var="item" items="${items}">
+                                <div class="flex flex-col gap-2 p-4 border rounded-lg flex-1 min-w-[200px] max-w-[300px]">
+                                    <div class="w-full rounded-xl overflow-hidden" style="aspect-ratio: 1/1;">
+                                        <img src="${pageContext.request.contextPath}/resources/images/${item.image}" class="w-full h-full object-contain" />
+                                    </div>
+                                    <div>
+                                        <p class="text-[#111318] text-base font-medium leading-normal">${item.title}</p>
+                                        <p class="text-[#636f88] text-sm font-normal leading-normal">$${item.price}</p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +62,7 @@
                 <div class="flex max-w-[960px] flex-1 flex-col">
                     <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
                         <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                            <a class="text-[#636f88] text-base font-normal leading-normal min-w-40" href="#">Homepage</a>
+                            <a class="text-[#636f88] text-base font-normal leading-normal min-w-40">Homepage</a>
                         </div>
                         <p class="text-[#636f88] text-base font-normal leading-normal">© 2024 lotus root market</p>
                     </footer>

@@ -22,4 +22,9 @@ public class ItemsDAO {
         String sql = "SELECT * FROM Items";
         return jdbcTemplate.queryForList(sql);
     }
+    
+    public void addItem(String title, String description, int price, String imagePath) {
+        String sql = "INSERT INTO Items (title, description, price, image) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, title, description, price, imagePath);
+    }
 }

@@ -21,4 +21,8 @@ public class ItemsService {
     public List<Map<String, Object>> getAllItems() {
         return itemsDAO.getAllItems();
     }
+    
+    public void addItem(String title, String description, int price, String imagePath) {
+        itemsDAO.addItem(title, description, price, imagePath);
+    }
 }
