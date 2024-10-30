@@ -18,7 +18,7 @@
                     <div class="size-4">
                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
                     </div>
-                    <h2 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">lotus root market</h2>
+                    <a href="${pageContext.request.contextPath}/main" class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">lotus root market</a>
                 </div>
                 <div class="flex gap-2">
                     <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]">
@@ -49,7 +49,7 @@
                                         <img src="${pageContext.request.contextPath}/resources/images/${item.image}" class="w-full h-full object-contain" />
                                     </div>
                                     <div>
-                                        <p class="text-[#111318] text-base font-medium leading-normal">${item.title}</p>
+                                        <a href="${pageContext.request.contextPath}/data?item_id=${item.item_id}" class="text-[#111318] text-base font-medium leading-normal">${item.title}</a>
                                         <p class="text-[#636f88] text-sm font-normal leading-normal">$${item.price}</p>
                                     </div>
                                 </div>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.market.yeonsung.service.ItemsService;
 
@@ -66,6 +67,17 @@ public class HomeController {
     @RequestMapping("/add")
     public String showAddItemForm() {
         return "registration";
+    }
+    // 상품 상세 정보 화면
+    @RequestMapping("/data")
+    public String data(@RequestParam("item_id") int itemId, Model model) {
+        model.addAttribute("item", itemsService.getItemById(itemId));
+        return "data";
+    }
+    // 채팅 화면
+    @RequestMapping("/chat")
+    public String chat() {
+        return "chat";
     }
 	
 }
