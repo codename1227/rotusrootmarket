@@ -23,25 +23,25 @@
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col max-w-[600px] flex-1">
                     <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">물품 등록</h3>
-                    <form action="${pageContext.request.contextPath}/items/add" method="post" class="flex flex-col gap-4 p-4 border rounded-lg">
-                        <div class="flex flex-col gap-2">
-                            <label for="title" class="text-[#111318] text-base font-medium">물품명</label>
-                            <input type="text" id="title" name="title" class="border px-3 py-2 rounded-md" placeholder="물품 제목을 입력하세요" required />
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="description" class="text-[#111318] text-base font-medium">물품 설명</label>
-                            <textarea id="description" name="description" class="border px-3 py-2 rounded-md" rows="4" placeholder="물품 설명을 입력하세요" required></textarea>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="price" class="text-[#111318] text-base font-medium">가격 (₩)</label>
-                            <input type="number" id="price" name="price" class="border px-3 py-2 rounded-md" min="1" placeholder="가격을 입력하세요" required />
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="imagePath" class="text-[#111318] text-base font-medium">이미지 경로</label>
-                            <input type="text" id="image" name="image" class="border px-3 py-2 rounded-md" placeholder="이미지 경로를 입력하세요" />
-                        </div>
-                        <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md">물품 등록하기</button>
-                    </form>
+					<form action="${pageContext.request.contextPath}/items/add" method="post"  class="flex flex-col gap-4 p-4 border rounded-lg">
+					    <div class="flex flex-col gap-2">
+					        <label for="title" class="text-[#111318] text-base font-medium">물품명</label>
+					        <input type="text" id="title" name="title" class="border px-3 py-2 rounded-md" placeholder="물품 제목을 입력하세요" required />
+					    </div>
+					    <div class="flex flex-col gap-2">
+					        <label for="description" class="text-[#111318] text-base font-medium">물품 설명</label>
+					        <textarea id="description" name="description" class="border px-3 py-2 rounded-md" rows="4" placeholder="물품 설명을 입력하세요" required></textarea>
+					    </div>
+					    <div class="flex flex-col gap-2">
+					        <label for="price" class="text-[#111318] text-base font-medium">가격 (₩)</label>
+					        <input type="number" id="price" name="price" class="border px-3 py-2 rounded-md" min="1" placeholder="가격을 입력하세요" required />
+					    </div>
+					    <div class="flex flex-col gap-2">
+					        <label for="image" class="text-[#111318] text-base font-medium">이미지 선택</label>
+					        <input type="file" id="image" name="image" class="border px-3 py-2 rounded-md" accept="image/*" />
+					    </div>
+					    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md">물품 등록하기</button>
+					</form>
                 </div>
             </div>
             <footer class="flex justify-center">
