@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.market.yeonsung.dao.ItemsDAO;
 
@@ -22,7 +23,7 @@ public class ItemsService {
         return itemsDAO.getAllItems();
     }
     
-    public void addItem(String title, String description, int price, String imagePath) {
-        itemsDAO.addItem(title, description, price, imagePath);
+    public void addItem(String title, String description, int price, String image) {
+        itemsDAO.addItem(title, description, price, image);
     }
 }

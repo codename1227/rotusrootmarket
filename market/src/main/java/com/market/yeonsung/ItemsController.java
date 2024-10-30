@@ -21,19 +21,19 @@ public class ItemsController {
     public String addItem(@RequestParam("title") String title,
                           @RequestParam("description") String description,
                           @RequestParam("price") int price,
-                          @RequestParam("imagePath") String imagePath,
+                          @RequestParam("image") String image,
                           Model model) {
         // 입력값 유효성 검증 및 서비스 호출
         if (title == null || title.isEmpty()) {
             model.addAttribute("error", "Title cannot be empty");
-            return "addItemForm";
+            return "registration";
         }
         if (price <= 0) {
             model.addAttribute("error", "Price must be greater than 0");
-            return "addItemForm";
+            return "registration";
         }
         
-        itemsService.addItem(title, description, price, imagePath);
+        itemsService.addItem(title, description, price, image);
         return "redirect:/main";
     }
 

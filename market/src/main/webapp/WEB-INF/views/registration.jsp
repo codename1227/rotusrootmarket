@@ -38,7 +38,7 @@
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="imagePath" class="text-[#111318] text-base font-medium">이미지 경로</label>
-                            <input type="text" id="imagePath" name="imagePath" class="border px-3 py-2 rounded-md" placeholder="이미지 경로를 입력하세요" />
+                            <input type="text" id="image" name="image" class="border px-3 py-2 rounded-md" placeholder="이미지 경로를 입력하세요" />
                         </div>
                         <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md">물품 등록하기</button>
                     </form>

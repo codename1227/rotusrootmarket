@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class ItemsDAO {
@@ -23,8 +24,8 @@ public class ItemsDAO {
         return jdbcTemplate.queryForList(sql);
     }
     
-    public void addItem(String title, String description, int price, String imagePath) {
+    public void addItem(String title, String description, int price, String image) {
         String sql = "INSERT INTO Items (title, description, price, image) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, title, description, price, imagePath);
+        jdbcTemplate.update(sql, title, description, price, image);
     }
 }
