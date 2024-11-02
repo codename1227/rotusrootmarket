@@ -58,7 +58,7 @@ body {
 	margin-bottom: 0px; 
 	color: #fff;
 	font-size: 16px;
-	background-color: #000000;
+	background-color: #e78111;
 	border-radius: 6px;
 }
 
@@ -105,12 +105,12 @@ body {
 </head>
 <body>
 	<div class="login-wrapper">
-		<h2>Login</h2>
+		<h2 style="color: #e78111;">로그인</h2>
 		<form id="login-form" action="login" method="post"
 			class="d-flex align-items-center">
-			<input type="text" name="id" maxlength="50" placeholder="id"
+			<input type="text" name="id" maxlength="50" placeholder="아이디"
 				value="${rememberedId}"> <input type="password"
-				name="passwd" maxlength="16" placeholder="passwd"> <input
+				name="passwd" maxlength="16" placeholder="비밀번호"> <input
 				type="checkbox" id="remember-check" name="remember-check"> <label
 				for="remember-check">아이디를 저장하시겠습니까?</label> <input type="submit"
 				value="로그인"> <input type="button" value="회원가입"

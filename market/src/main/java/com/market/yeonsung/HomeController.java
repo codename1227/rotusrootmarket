@@ -1,5 +1,6 @@
 package com.market.yeonsung;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,20 +10,35 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.market.yeonsung.dao.EmailRequestDto;
 import com.market.yeonsung.service.ItemsService;
+import com.market.yeonsung.service.MailSendService;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * Handles requests for the application home page.
  */
+@RequiredArgsConstructor
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private MailSendService mailService;
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
@@ -44,6 +60,28 @@ public class HomeController {
 		return "loginpage";
 	}
 	
+	@ResponseBody
+	@PostMapping(value = "/sendMail", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String mailSend(@RequestBody EmailRequestDto emailDto){
+        System.out.println("이메일 인증 요청이 들어옴");
+        System.out.println("이메일 인증 이메일 :"+emailDto.getEmail());
+        return mailService.joinEmail(emailDto.getEmail());
+    }
+    
+    
+	@PostMapping("/mailauthCheck")
+	@ResponseBody // JSON 형식으로 응답하기 위해 추가
+	public ResponseEntity<String> AuthCheck(@RequestBody EmailRequestDto emailCheckDto) {
+	    Boolean checked = mailService.checkAuthNum(emailCheckDto.getEmail(), emailCheckDto.getAuthNum());
+
+	    if (checked) {
+	        return ResponseEntity.ok("인증 성공"); // 성공 메시지 반환
+	    } else {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("인증 번호가 올바르지 않습니다."); // 실패 메시지 반환
+	    }
+	}
+
+	
 	
 	/*
 	 * 로그인 화면
@@ -51,9 +89,7 @@ public class HomeController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		return "loginpage";
-	}
-	  
-	
+	}	
 	/*
 	 * 메인 화면
 	 */
@@ -79,6 +115,11 @@ public class HomeController {
     public String chat() {
         return "chat";
     }
+    
+	@RequestMapping("/insert")
+	public String insert(Model model) {
+		return "insert";
+	}	
 	
 }
 
