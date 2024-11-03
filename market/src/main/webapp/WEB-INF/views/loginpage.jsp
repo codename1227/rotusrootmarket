@@ -7,6 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>로그인</title>
 <style>
+
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.custom-font {
+    font-family: 'TmoneyRoundWindExtraBold';
+}
+
 * {
 	padding: 0;
 	margin: 0;
@@ -19,15 +31,15 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	height: 100%;
 	background-color: #F8F8F8;
 	color: #333;
 }
 
 .login-wrapper {
 	width: 400px;
-	height: 400px;
-	padding: 40px;
+	height: 80%;
+	padding: 25px;
 	box-sizing: border-box;
 	background-color: #fff;
 	border-radius: 6px;
@@ -105,7 +117,11 @@ body {
 </head>
 <body>
 	<div class="login-wrapper">
-		<h2 style="color: #e78111;">로그인</h2>
+		<h2 class="custom-font" style="color: #e78111;">
+		    <img src="resources/images/logo.png" style="width: 50px; height: auto; vertical-align: middle;">
+		    연근 마켓
+		</h2>
+		<img src="resources/images/main.png" style="width: 250px; height: auto; margin-left:40px;">
 		<form id="login-form" action="login" method="post"
 			class="d-flex align-items-center">
 			<input type="text" name="id" maxlength="50" placeholder="아이디"
