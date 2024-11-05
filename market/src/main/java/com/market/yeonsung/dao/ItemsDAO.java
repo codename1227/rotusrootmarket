@@ -24,8 +24,8 @@ public class ItemsDAO {
         return jdbcTemplate.queryForList(sql);
     }
     
-    public void addItem(String title, String description, int price, String image) {
-        String sql = "INSERT INTO Items (title, description, price, image) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, title, description, price, image);
+    public void addItem(String id, String title, String description, int price, String image) {
+        String sql = "INSERT INTO Items (id, title, description, price, image) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, id, title, description, price, image);
     }
 }

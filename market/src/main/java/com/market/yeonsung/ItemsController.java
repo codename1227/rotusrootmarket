@@ -1,6 +1,8 @@
 package com.market.yeonsung;
 
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
 
 import com.market.yeonsung.service.ItemsService;
 
@@ -20,12 +25,21 @@ public class ItemsController {
 
     // 상품 등록 처리
     @PostMapping("/add")
-    public String addItem(@RequestParam("title") String title,
+    public String addItem(HttpSession session,
+                          @RequestParam("title") String title,
                           @RequestParam("description") String description,
                           @RequestParam("price") int price,
-                          @RequestParam("image") String image,
+                          @RequestParam("image") MultipartFile image, // MultipartFile로 수정
                           Model model) {
-        // 입력값 유효성 검증 및 서비스 호출
+        
+        // 세션에서 사용자 ID 가져오기
+        String id = (String) session.getAttribute("loggedInUser");
+        
+        // 입력값 유효성 검증
+        if (id == null || id.isEmpty()) {
+            model.addAttribute("error", "You must be logged in to add items.");
+            return "registration";
+        }
         if (title == null || title.isEmpty()) {
             model.addAttribute("error", "Title cannot be empty");
             return "registration";
@@ -35,9 +49,29 @@ public class ItemsController {
             return "registration";
         }
         
-        itemsService.addItem(title, description, price, image);
+        // 이미지 파일이 업로드되었는지 확인 및 처리
+        String imageName = null;
+        if (image != null && !image.isEmpty()) {
+            try {
+                // 실제 실행 경로에 저장
+                imageName = image.getOriginalFilename();
+                String uploadDir = session.getServletContext().getRealPath("/resources/images/");
+                Path uploadPath = Paths.get(uploadDir + imageName);
+                
+                // 디렉토리가 존재하지 않으면 생성
+                Files.createDirectories(uploadPath.getParent());
+                
+                // 파일 저장
+                Files.write(uploadPath, image.getBytes());
+                
+            } catch (Exception e) {
+                model.addAttribute("error", "Failed to upload image.");
+                return "registration";
+            }
+        }
+        
+        // 상품 등록 처리
+        itemsService.addItem(id, title, description, price, imageName);
         return "redirect:/main";
     }
-    
-
 }

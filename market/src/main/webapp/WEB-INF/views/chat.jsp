@@ -45,6 +45,13 @@
 				            <form action="${pageContext.request.contextPath}/logout" method="post" style="display: inline;">
 				                <button type="submit" class="bg-[#f0f2f4] text-sm font-bold px-4 h-10 rounded-xl">로그아웃</button>
 				            </form>
+				
+				            <!-- 로그인 상태일 때만 "물품 등록" 버튼 표시 -->
+				            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" 
+				                onclick="window.location.href='${pageContext.request.contextPath}/add'">
+				                <span class="truncate">물품 등록</span>
+				            </button>
+				
 				        </c:when>
 				        <c:otherwise>
 				            <!-- 로그인되지 않은 경우, 로그인 버튼 표시 -->
@@ -53,9 +60,7 @@
 				            </button>
 				        </c:otherwise>
 				    </c:choose>
-				    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/add'">
-				        <span class="truncate">물품 등록</span>
-				    </button>
+				    
 				    <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
 				        <div class="text-[#111318]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
 				            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">

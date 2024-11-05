@@ -23,7 +23,7 @@ public class ItemsService {
         return itemsDAO.getAllItems();
     }
     
-    public void addItem(String title, String description, int price, String image) {
-        itemsDAO.addItem(title, description, price, image);
+    public void addItem(String id, String title, String description, int price, String image) {
+        itemsDAO.addItem(id, title, description, price, image);
     }
 }
