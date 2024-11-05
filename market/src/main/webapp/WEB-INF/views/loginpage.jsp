@@ -118,8 +118,10 @@ body {
 <body>
 	<div class="login-wrapper">
 		<h2 class="custom-font" style="color: #e78111;">
-		    <img src="resources/images/logo.png" style="width: 50px; height: auto; vertical-align: middle;">
-		    연근 마켓
+		    <a href="${pageContext.request.contextPath}/main" style="text-decoration: none; color: #e78111;">
+		        <img src="resources/images/logo.png" style="width: 50px; height: auto; vertical-align: middle;">
+		        연근 마켓
+		    </a>
 		</h2>
 		<img src="resources/images/main.png" style="width: 250px; height: auto; margin-left:40px;">
 		<form id="login-form" action="login" method="post"

@@ -62,14 +62,17 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
+        List<Map<String, Object>> items = itemsService.getAllItems();
+        model.addAttribute("items", items);
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
+        
+        model.addAttribute("serverTime", formattedDate );
 		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "loginpage";
+		return "mainpage";
 	}
 	
 	@ResponseBody
@@ -138,7 +141,7 @@ public class HomeController {
 		//세션 무효화를 위해 invalidate 메서드 사용
 		session.invalidate();
 		 // 로그아웃 후 로그인 페이지로 이동
-		return "redirect:/login"; 
+		return "redirect:/main"; 
 	}
 
 	/*

@@ -10,6 +10,18 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 </head>
+<style>
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.custom-font {
+    font-family: 'TmoneyRoundWindExtraBold';
+    font-size: 26px;
+}
+</style>
 <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         <div class="layout-container flex h-full grow flex-col">
@@ -18,23 +30,40 @@
                     <div class="size-4">
                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
                     </div>
-                    <a href="${pageContext.request.contextPath}/main" class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">lotus root market</a>
+					<h2 class="custom-font" style="color: #e78111;">
+					    <a href="${pageContext.request.contextPath}/main" style="text-decoration: none; color: #e78111; display: inline-flex; align-items: center;">
+					        <img src="resources/images/logo.png" style="width: 60px; height: auto; margin-right: 3px;">
+					        연근 마켓
+					    </a>
+					</h2>
                 </div>
-                <div class="flex gap-2">
-                    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]">
-                        <span class="truncate">Sign in</span>
-                    </button>
-                    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/add'">
-                        <span class="truncate">물품 등록</span>
-                    </button>
-                    <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
-                        <div class="text-[#111318]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
-                            </svg>
-                        </div>
-                    </button>
-                </div>
+				<div class="header-form flex gap-2 items-center">
+				    <c:choose>
+				        <c:when test="${not empty sessionScope.loggedInUser}">
+				            <!-- 로그인된 경우, 사용자 ID 표시 및 로그아웃 버튼 -->
+				            <span class="text-sm font-bold">환영합니다, ${sessionScope.loggedInUser}님!</span>
+				            <form action="${pageContext.request.contextPath}/logout" method="post" style="display: inline;">
+				                <button type="submit" class="bg-[#f0f2f4] text-sm font-bold px-4 h-10 rounded-xl">로그아웃</button>
+				            </form>
+				        </c:when>
+				        <c:otherwise>
+				            <!-- 로그인되지 않은 경우, 로그인 버튼 표시 -->
+				            <button onclick="window.location.href='${pageContext.request.contextPath}/login'" class="bg-[#f0f2f4] text-sm font-bold px-4 h-10 rounded-xl">
+				                로그인
+				            </button>
+				        </c:otherwise>
+				    </c:choose>
+				    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/add'">
+				        <span class="truncate">물품 등록</span>
+				    </button>
+				    <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+				        <div class="text-[#111318]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
+				            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+				                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+				            </svg>
+				        </div>
+				    </button>
+				</div>
             </header>
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
