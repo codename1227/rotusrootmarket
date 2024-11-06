@@ -26,4 +26,8 @@ public class ItemsService {
     public void addItem(String id, String title, String description, int price, String image) {
         itemsDAO.addItem(id, title, description, price, image);
     }
+    
+    public void updateItem(int itemId, String title, String description, int price, String image) {
+        itemsDAO.updateItem(itemId, title, description, price, image);
+    }
 }

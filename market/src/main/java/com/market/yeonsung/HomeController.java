@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -163,6 +164,13 @@ public class HomeController {
     public String data(@RequestParam("item_id") int itemId, Model model) {
         model.addAttribute("item", itemsService.getItemById(itemId));
         return "data";
+    }
+    //상품 수정 화면
+    @GetMapping("/edit")
+    public String showEditPage(@RequestParam("item_id") int itemId, Model model) {
+        Map<String, Object> item = itemsService.getItemById(itemId); // 아이템 정보 가져오기
+        model.addAttribute("item", item); // 모델에 아이템 정보 추가
+        return "edit"; // edit.jsp로 이동
     }
     // 채팅 화면
     @RequestMapping("/chat")

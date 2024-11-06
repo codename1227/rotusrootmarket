@@ -74,4 +74,39 @@ public class ItemsController {
         itemsService.addItem(id, title, description, price, imageName);
         return "redirect:/main";
     }
+    
+    @PostMapping("/edit")
+    public String editItem(@RequestParam("itemId") int itemId,
+                           @RequestParam("title") String title,
+                           @RequestParam("description") String description,
+                           @RequestParam("price") int price,
+                           @RequestParam("image") MultipartFile image,
+                           HttpSession session,
+                           Model model) {
+        // 로그인 여부 확인
+        String id = (String) session.getAttribute("loggedInUser");
+        if (id == null) {
+            model.addAttribute("error", "You must be logged in to edit items.");
+            return "login"; // 로그인 페이지로 리다이렉트
+        }
+        
+        // 이미지 파일 처리
+        String imageName = null;
+        if (image != null && !image.isEmpty()) {
+            try {
+                imageName = image.getOriginalFilename();
+                String uploadDir = session.getServletContext().getRealPath("/resources/images/");
+                Path uploadPath = Paths.get(uploadDir + imageName);
+                Files.createDirectories(uploadPath.getParent());
+                Files.write(uploadPath, image.getBytes());
+            } catch (Exception e) {
+                model.addAttribute("error", "Failed to upload image.");
+                return "edit"; // 오류 시 수정 페이지로
+            }
+        }
+        
+        // 아이템 업데이트 처리
+        itemsService.updateItem(itemId, title, description, price, imageName);
+        return "redirect:/data?item_id=" + itemId; // 업데이트 후 상세 페이지로 리다이렉트
+    }
 }

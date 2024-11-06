@@ -28,4 +28,9 @@ public class ItemsDAO {
         String sql = "INSERT INTO Items (id, title, description, price, image) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, id, title, description, price, image);
     }
+    
+    public void updateItem(int itemId, String title, String description, int price, String image) {
+        String sql = "UPDATE Items SET title = ?, description = ?, price = ?, image = ? WHERE item_id = ?";
+        jdbcTemplate.update(sql, title, description, price, image, itemId);
+    }
 }
