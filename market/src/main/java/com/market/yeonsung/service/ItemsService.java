@@ -30,4 +30,8 @@ public class ItemsService {
     public void updateItem(int itemId, String title, String description, int price, String image) {
         itemsDAO.updateItem(itemId, title, description, price, image);
     }
+    
+    public void deleteItem(int itemId) {
+        itemsDAO.deleteItem(itemId);
+    }
 }

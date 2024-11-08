@@ -109,4 +109,18 @@ public class ItemsController {
         itemsService.updateItem(itemId, title, description, price, imageName);
         return "redirect:/data?item_id=" + itemId; // 업데이트 후 상세 페이지로 리다이렉트
     }
+    
+    @PostMapping("/delete")
+    public String deleteItem(@RequestParam("item_id") int itemId, HttpSession session, Model model) {
+        String id = (String) session.getAttribute("loggedInUser");
+        if (id == null) {
+            model.addAttribute("error", "You must be logged in to delete items.");
+            return "login";
+        }
+        
+        // 삭제 처리
+        itemsService.deleteItem(itemId);
+        return "redirect:/main";
+    }
+    
 }

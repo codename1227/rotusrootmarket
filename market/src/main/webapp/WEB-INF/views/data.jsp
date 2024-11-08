@@ -93,9 +93,17 @@
 					<div class="flex justify-end mt-4 gap-4">
 					    <c:choose>
 					        <c:when test="${not empty sessionScope.loggedInUser}">
-					            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/edit?item_id=${item.item_id}'">
-					                <span class="truncate">수정하기</span>
-					            </button>
+					            <c:if test="${sessionScope.loggedInUser == item.id}">
+					                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/edit?item_id=${item.item_id}'">
+					                    <span class="truncate">수정하기</span>
+					                </button>
+									<form action="${pageContext.request.contextPath}/items/delete" method="post" style="display: inline;">
+									    <input type="hidden" name="item_id" value="${item.item_id}" />
+									    <button type="submit" onclick="return confirm('삭제하시겠습니까?');" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]">
+									        <span class="truncate">삭제하기</span>
+									    </button>
+									</form>
+					            </c:if>
 					            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/chat'">
 					                <span class="truncate">채팅하기</span>
 					            </button>

@@ -33,4 +33,9 @@ public class ItemsDAO {
         String sql = "UPDATE Items SET title = ?, description = ?, price = ?, image = ? WHERE item_id = ?";
         jdbcTemplate.update(sql, title, description, price, image, itemId);
     }
+    
+    public void deleteItem(int itemId) {
+        String sql = "DELETE FROM Items WHERE item_id = ?";
+        jdbcTemplate.update(sql, itemId);
+    }
 }
