@@ -73,7 +73,7 @@
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                     <div class="flex justify-between items-center px-4 pb-2 pt-4">
-                        <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">Item Details</h3>
+                        <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">물품 상세 정보</h3>
                     </div>
 					<div class="flex gap-8 p-4 border rounded-lg">
 					    <div class="w-1/2 rounded-xl overflow-hidden" style="max-width: 400px; max-height: 400px; aspect-ratio: 1/1;">
@@ -108,7 +108,7 @@
                 <div class="flex max-w-[960px] flex-1 flex-col">
                     <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
                         <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                            <a class="text-[#636f88] text-base font-normal leading-normal min-w-40">Homepage</a>
+                            <a class="text-[#636f88] text-base font-normal leading-normal min-w-40">Detailed page</a>
                         </div>
                         <p class="text-[#636f88] text-base font-normal leading-normal">© 2024 lotus root market</p>
                     </footer>
