@@ -21,10 +21,9 @@ public class UserDao {
 	// User 정보를 DB에 넣어주는 insert 선언
 	// INSERT 문을 사용 => JdbcTemplate.update 를 사용해 값을 넣어줌
 	public void insert(UserDto user) {
-		String sql = "INSERT INTO member (id, passwd, name, email, postcode, address, detailaddress, extraaddress) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, user.getId(), user.getPasswd(), user.getName(), user.getEmail(), user.getPostcode(),
-				user.getAddress(), user.getDetailAddress(), user.getExtraAddress());
+		String sql = "INSERT INTO member (id, passwd, name, email) "
+				+ "VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sql, user.getId(), user.getPasswd(), user.getName(), user.getEmail());
 	}
 
 	// ID가 존재하는지 확인하는 메소드
@@ -72,8 +71,6 @@ public class UserDao {
 			user.setPasswd(rs.getString("passwd"));
 			user.setName(rs.getString("name"));
 			user.setEmail(rs.getString("email"));
-			user.setPostcode(rs.getString("postcode"));
-			user.setAddress(rs.getString("address"));
 	
 			// 매핑된 UserDto 객체 반환
 			return user;

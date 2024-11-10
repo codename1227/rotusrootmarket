@@ -251,7 +251,7 @@
             var email = $('#email').val();
             if (email) {
                 $.ajax({
-                    url: '/market/sendMail',
+                    url: '/yeonsung/sendMail',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ email: email }),
@@ -293,7 +293,7 @@
 
             if (email && authNum) {
                 $.ajax({
-                    url: '/market/mailauthCheck',
+                    url: '/yeonsung/mailauthCheck',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ email: email, authNum: authNum }),

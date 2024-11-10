@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -40,27 +39,21 @@
 				<div class="header-form flex gap-2 items-center">
 				    <c:choose>
 				        <c:when test="${not empty sessionScope.loggedInUser}">
-				            <!-- 로그인된 경우, 사용자 ID 표시 및 로그아웃 버튼 -->
 				            <span class="text-sm font-bold">환영합니다, ${sessionScope.loggedInUser}님!</span>
 				            <form action="${pageContext.request.contextPath}/logout" method="post" style="display: inline;">
 				                <button type="submit" class="bg-[#f0f2f4] text-sm font-bold px-4 h-10 rounded-xl">로그아웃</button>
 				            </form>
-				
-				            <!-- 로그인 상태일 때만 "물품 등록" 버튼 표시 -->
 				            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" 
 				                onclick="window.location.href='${pageContext.request.contextPath}/add'">
 				                <span class="truncate">물품 등록</span>
 				            </button>
-				
 				        </c:when>
 				        <c:otherwise>
-				            <!-- 로그인되지 않은 경우, 로그인 버튼 표시 -->
 				            <button onclick="window.location.href='${pageContext.request.contextPath}/login'" class="bg-[#f0f2f4] text-sm font-bold px-4 h-10 rounded-xl">
 				                로그인
 				            </button>
 				        </c:otherwise>
 				    </c:choose>
-				    
 				    <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
 				        <div class="text-[#111318]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
 				            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
@@ -75,12 +68,12 @@
                     <div class="flex justify-between items-center px-4 pb-2 pt-4">
                         <h3 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">채팅</h3>
                     </div>
-                    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-                        <div class="flex flex-wrap gap-3 pb-3">
-                        
-							<h4>미완성</h4>
-							
-                        </div>
+                    <div class="chat-window p-4 border border-gray-200 rounded-lg overflow-y-auto max-h-80 mb-4" id="chatWindow">
+                        <!-- 실시간 채팅 메시지가 여기에 추가됩니다. -->
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <input type="text" id="messageInput" class="flex-1 border border-gray-200 rounded-lg p-2" placeholder="메시지를 입력하세요...">
+                        <button onclick="sendMessage()" class="bg-[#e78111] text-white px-4 py-2 rounded-lg">전송</button>
                     </div>
                 </div>
             </div>
@@ -97,5 +90,47 @@
          </div>
      </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const senderId = "${sessionScope.loggedInUser}";
+    const receiverId = "<%= request.getParameter("id") %>"; // URL 파라미터로 전달된 id 사용
+    const itemId = "<%= request.getParameter("item_id") %>"; // URL 파라미터로 전달된 item_id 사용
+
+    // 서버에서 메시지 목록을 가져와서 채팅 창에 표시하는 함수
+    function loadMessages() {
+        $.get("${pageContext.request.contextPath}/getMessages", { itemId: itemId }, function(messages) {
+            $('#chatWindow').empty(); // 이전 메시지 삭제
+            messages.forEach(message => {
+                const messageElement = `<div><strong>${message.sender_id}</strong>: ${message.message}</div>`;
+                $('#chatWindow').append(messageElement);
+            });
+            $('#chatWindow').scrollTop($('#chatWindow')[0].scrollHeight); // 스크롤을 가장 아래로 이동
+        });
+    }
+
+    // 메시지를 전송하는 함수
+    function sendMessage() {
+        const message = $('#messageInput').val();
+        if (message.trim() === '') return;
+
+        $.post("${pageContext.request.contextPath}/sendMessage", {
+            itemId: itemId,
+            senderId: senderId,
+            receiverId: receiverId,
+            message: message
+        }, function(response) {
+            if (response === 'success') {
+                $('#messageInput').val('');
+                loadMessages(); // 메시지를 보낸 후 즉시 메시지 목록을 갱신
+            }
+        });
+    }
+
+    // 페이지 로드 시 메시지를 주기적으로 갱신
+    $(document).ready(function() {
+        loadMessages(); // 초기 메시지 로드
+        setInterval(loadMessages, 3000); // 3초마다 메시지 갱신
+    });
+</script>
 </body>
 </html>

@@ -104,9 +104,10 @@
 									    </button>
 									</form>
 					            </c:if>
-					            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.location.href='${pageContext.request.contextPath}/chat'">
-					                <span class="truncate">채팅하기</span>
-					            </button>
+								<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" 
+								        onclick="window.location.href='${pageContext.request.contextPath}/chat?item_id=${item.item_id}&id=${item.id}'">
+								    <span class="truncate">채팅하기</span>
+								</button>
 					        </c:when>
 					    </c:choose>
 					</div>

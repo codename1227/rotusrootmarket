@@ -172,11 +172,7 @@ public class HomeController {
         model.addAttribute("item", item); // 모델에 아이템 정보 추가
         return "edit"; // edit.jsp로 이동
     }
-    // 채팅 화면
-    @RequestMapping("/chat")
-    public String chat() {
-        return "chat";
-    }
+
     //회원 가입 화면
 	@RequestMapping("/insert")
 	public String insert(Model model) {

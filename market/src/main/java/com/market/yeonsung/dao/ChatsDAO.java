@@ -1,24 +1,25 @@
 package com.market.yeonsung.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class ChatsDAO {
 
-    private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-    public ChatsDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public void insertChat(int itemId, String senderId, String receiverId, String message) {
+        String sql = "INSERT INTO Chats (item_id, sender_id, receiver_id, message) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, itemId, senderId, receiverId, message);
     }
 
-    public List<Map<String, Object>> getChatBetweenUsers(int senderId, int receiverId) {
-        String sql = "SELECT * FROM Chats " +
-                     "WHERE (sender_id = ? AND receiver_id = ?) " +
-                     "OR (sender_id = ? AND receiver_id = ?) " +
-                     "ORDER BY sent_at";
-        return jdbcTemplate.queryForList(sql, senderId, receiverId, receiverId, senderId);
+    public List<Map<String, Object>> fetchChatMessages(int itemId) {
+        String sql = "SELECT sender_id, message, sent_at FROM Chats WHERE item_id = ? ORDER BY sent_at ASC";
+        return jdbcTemplate.queryForList(sql, itemId);
     }
 }
