@@ -22,6 +22,11 @@
     font-size: 26px;
 }
 </style>
+<script>
+    function openMessagePopup() {
+        window.open('${pageContext.request.contextPath}/message', 'MessagePopup', 'width=500,height=600,resizable=yes');
+    }
+</script>
 <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         <div class="layout-container flex h-full grow flex-col">
@@ -47,10 +52,11 @@
 				            </form>
 				
 				            <!-- 로그인 상태일 때만 "물품 등록" 버튼 표시 -->
-				            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" 
-				                onclick="window.location.href='${pageContext.request.contextPath}/add'">
-				                <span class="truncate">물품 등록</span>
-				            </button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em] gap-2"
+        onclick="window.location.href='${pageContext.request.contextPath}/add'">
+    <img src="resources/images/register.png" alt="물품 등록 아이콘" class="w-7 h-7" />
+    <span class="truncate">물품등록</span>
+</button>
 				
 				        </c:when>
 				        <c:otherwise>
@@ -61,13 +67,11 @@
 				        </c:otherwise>
 				    </c:choose>
 				    
-				    <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
-				        <div class="text-[#111318]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
-				            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-				                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
-				            </svg>
-				        </div>
-				    </button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+        onclick="openMessagePopup()">
+    <img src="resources/images/message.png" alt="쪽지 아이콘" class="w-10 h-10" />
+</button>
+					
 				</div>
             </header>
             <div class="px-40 flex flex-1 justify-center py-5">
@@ -104,10 +108,6 @@
 									    </button>
 									</form>
 					            </c:if>
-								<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111318] text-sm font-bold leading-normal tracking-[0.015em]" 
-								        onclick="window.location.href='${pageContext.request.contextPath}/chat?item_id=${item.item_id}&id=${item.id}'">
-								    <span class="truncate">채팅하기</span>
-								</button>
 					        </c:when>
 					    </c:choose>
 					</div>

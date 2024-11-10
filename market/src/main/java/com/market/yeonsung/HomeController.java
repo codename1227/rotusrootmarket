@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.market.yeonsung.dao.EmailRequestDto;
+import com.market.yeonsung.dao.MessageDAO;
+import com.market.yeonsung.dao.UserDao;
 import com.market.yeonsung.service.ItemsService;
 import com.market.yeonsung.service.MailSendService;
 import com.market.yeonsung.dao.UserDto;
@@ -51,6 +53,12 @@ public class HomeController {
 	
 	@Autowired
 	private MailSendService mailService;
+	
+    @Autowired
+    private UserDao userDao;
+    
+    @Autowired
+    private MessageDAO messageDAO;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -158,6 +166,39 @@ public class HomeController {
     @RequestMapping("/add")
     public String showAddItemForm() {
         return "registration";
+    }
+    // 메시지 전송 폼 화면
+    @GetMapping("/message")
+    public String messagePage(Model model, HttpSession session) {
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+        
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        // UserDao에서 사용자 목록 조회
+        List<Map<String, Object>> users = userDao.findAllUsers();
+        model.addAttribute("users", users);
+
+        return "message";
+    }
+    @GetMapping("/sendMessage")
+    public String sendMessagePage(@RequestParam("receiverId") String receiverId, Model model, HttpSession session) {
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        // 두 사용자 간의 메시지 기록 조회
+        List<Map<String, Object>> messageHistory = messageDAO.getMessageHistory(loggedInUser, receiverId);
+
+        // 로그인한 사용자와 쪽지 받는 사람의 ID, 메시지 기록을 모델에 추가
+        model.addAttribute("loggedInUser", loggedInUser);
+        model.addAttribute("receiverId", receiverId);
+        model.addAttribute("messageHistory", messageHistory);
+        
+        return "sendMessage";
     }
     // 상품 상세 정보 화면
     @RequestMapping("/data")

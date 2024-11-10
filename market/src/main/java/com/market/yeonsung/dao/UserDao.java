@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 // Spring 컨테이너에 Bean 등록, 데이터에 접근 가능 Dao 기능 
@@ -75,5 +77,10 @@ public class UserDao {
 			// 매핑된 UserDto 객체 반환
 			return user;
 		}
+	}
+	
+	public List<Map<String, Object>> findAllUsers() {
+	    String sql = "SELECT id, name, email FROM member";
+	    return jdbcTemplate.queryForList(sql);
 	}
 }
